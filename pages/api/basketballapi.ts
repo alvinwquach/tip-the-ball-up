@@ -1,10 +1,28 @@
-// creating API call
+// initialize cache
+const cache = {}
 
-export const getFromApi = async (): Promise<BasketballApi[]> => {
+// creating API call
+export const getStatsFromApi = async (): Promise<BasketballApi[]> => {
   const response = await fetch(
     'https://www.balldontlie.io/api/v1/stats?seasons[]=2021&player_ids[]&start_date=2021-10-18&per_page=100'
   )
   return response.json()
+}
+
+// creating API call to grab player by name
+export const getPlayerStatsFromAPIByName = async (
+  playerName: string
+): Promise<BasketballApi[]> => {
+  // if player is in cache, return it
+  if (cache[playerName]) {
+    return cache[playerName]
+  }
+  const response = await fetch(
+    `https://www.balldontlie.io/api/v1/stats?seasons[]=2021&player_ids[]&start_date=2021-10-18&per_page=100&search=${playerName}`
+  )
+  // api request saved into cache, return from cache
+  cache[playerName] = response.json()
+  return cache[playerName]
 }
 
 // createing nested types
@@ -70,7 +88,7 @@ export type BasketballApi = {
   turnover: number
 }
 
-export const getBasketball = async (): Promise<BasketballApi[]> => {
+export const getStats = async (): Promise<BasketballApi[]> => {
   return [
     {
       id: 7367681,
