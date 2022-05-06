@@ -2,7 +2,7 @@
 const cache = {}
 
 // creating API call
-export const getStatsFromApi = async (): Promise<BasketballApi[]> => {
+export const getFromApi = async (): Promise<BasketballApi[]> => {
   const response = await fetch(
     'https://www.balldontlie.io/api/v1/stats?seasons[]=2021&player_ids[]&start_date=2021-10-18&per_page=100'
   )

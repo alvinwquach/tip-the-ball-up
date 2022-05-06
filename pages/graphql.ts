@@ -1,9 +1,6 @@
 import { Resolvers } from '@apollo/client'
 import { makeExecutableSchema } from '@graphql-tools/schema'
-import {
-  getPlayerStatsFromAPIByName,
-  getStatsFromApi,
-} from './api/basketballapi'
+import { getPlayerStatsFromAPIByName, getFromApi } from './api/basketballapi'
 
 //schema
 const typeDefs = `
@@ -68,8 +65,23 @@ typeQuery {
   getplayer: Player
   getplayerbyname(name: String!): Player
 }
-
 `
+
+// creating api call
+const getStatsFromApi = async () => {
+  const response = await fetch(
+    'https://www.balldontlie.io/api/v1/stats?seasons[]=2021&player_ids[]&start_date=2021-10-18&per_page=100'
+  )
+  return response.json()
+}
+
+//creating api call to grab player by name
+const getPlayerFromAPIByName = async (playerName: string) => {
+  const response = await fetch(
+    `https://www.balldontlie.io/api/v1/stats?seasons[]=2021&player_ids[]&start_date=2021-10-18&per_page=100&search=${playerName}`
+  )
+  return response.json()
+}
 
 // interface from Apollo for resolvers
 const resolvers: Resolvers = {
@@ -79,11 +91,12 @@ const resolvers: Resolvers = {
       return players[0]
     },
     getplayerbyname: async (root, args) => {
-      const players = await getPlayerStatsFromAPIByName(args.name)
+      const players = await getPlayerFromAPIByName(args.name)
       return players[0]
     },
   },
 }
+
 
 // server
 export const schema = makeExecutableSchema({
