@@ -1,31 +1,11 @@
-// initialize cache
-const cache = {}
-
 // creating API call
-export const getFromApi = async (): Promise<BasketballApi[]> => {
+export const getStatsFromApi = async (): Promise<StatsApi[]> => {
   const response = await fetch(
-    'https://www.balldontlie.io/api/v1/stats?seasons[]=2021&player_ids[]&start_date=2021-10-18&per_page=100'
+    'https://www.balldontlie.io/api/v1/stats?per_page=100&start_date=2021-10-18'
   )
   return response.json()
 }
 
-// creating API call to grab player by name
-export const getPlayerStatsFromAPIByName = async (
-  playerName: string
-): Promise<BasketballApi[]> => {
-  // if player is in cache, return it
-  if (cache[playerName]) {
-    return cache[playerName]
-  }
-  const response = await fetch(
-    `https://www.balldontlie.io/api/v1/stats?seasons[]=2021&player_ids[]&start_date=2021-10-18&per_page=100&search=${playerName}`
-  )
-  // api request saved into cache, return from cache
-  cache[playerName] = response.json()
-  return cache[playerName]
-}
-
-// createing nested types
 type Team = {
   id: number
   abbreviation: string
@@ -61,8 +41,7 @@ type Game = {
   visitor_team_score: number
 }
 
-// creating types for type information
-export type BasketballApi = {
+export type StatsApi = {
   id: number
   ast: number
   blk: number
@@ -88,7 +67,7 @@ export type BasketballApi = {
   turnover: number
 }
 
-export const getStats = async (): Promise<BasketballApi[]> => {
+export const getStats = async (): Promise<StatsApi[]> => {
   return [
     {
       id: 7367681,
