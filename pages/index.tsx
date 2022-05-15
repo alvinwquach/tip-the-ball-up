@@ -64,6 +64,12 @@ const Home: NextPage = () => {
               className="input input-bordered w-full max-w-xs"
               {...register('userInput')}
             />
+            <button
+              className="btn btn-primary"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              Submit
+            </button>
             <button className="btn ml-2" onClick={handleClick}>
               Reset
             </button>

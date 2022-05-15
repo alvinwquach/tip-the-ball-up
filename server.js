@@ -13,7 +13,7 @@ type Player {
   height_inches: Int
   position: String!
   team: Team
-  weight_pounds: Float
+  weight_pounds: Int
 }
 
 type Team {

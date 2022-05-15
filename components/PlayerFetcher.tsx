@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetBeerNameQuery } from '../generated/graphql'
+import { useGetPlayerNameQuery } from '../src/generated/graphql'
 import BasketballInformationGraphQL from './BasketballInformationGraphQL'
 
 type PlayerFetcherProps = {
@@ -17,7 +17,7 @@ function PlayerFetcher({ playername, searched }: PlayerFetcherProps) {
   return (
     <div>
       {data && (
-        <BasketballInformationGraphQL playerinfo={data} searched={searched} />
+        <BasketballInformationGraphQL playername={data} searched={searched} />
       )}
     </div>
   )

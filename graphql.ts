@@ -6,12 +6,14 @@ import { getPlayerFromApiByName, getPlayerFromApi } from './basketballapi'
 const typeDefs = `
 type Player {
     id: Int!
+    first_name: String!
     name: String!
     height_feet: Int
     height_inches: Int
+    last_name: String!
     position: String!
     team: Team
-    weight_pounds: Float
+    weight_pounds: Int
 }
 
 type Team {
@@ -22,6 +24,11 @@ type Team {
     division: String!
     full_name: String!
     name: String!
+}
+
+type Query {
+  getplayer: Player
+  getplayerbyname(name: String!): Player
 }
 `
 
@@ -36,7 +43,7 @@ const resolvers: Resolvers = {
     },
     getplayerbyname: async (root, args) => {
       const players = await getPlayerFromApiByName(args.name)
-      return players[0]
+      return players.data[0]
     },
   },
 }
