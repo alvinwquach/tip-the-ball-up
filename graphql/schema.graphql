@@ -60,7 +60,6 @@ type Team {
 }
 
 type Query {
-  getplayer: Player
   getplayerbyname(name: String!): Player
   getstatsbyplayerid(playerid: Int!): StatsByPlayerId
 }

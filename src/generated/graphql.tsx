@@ -45,7 +45,6 @@ export type Player = {
 
 export type Query = {
   __typename?: 'Query';
-  getplayer?: Maybe<Player>;
   getplayerbyname?: Maybe<Player>;
   getstatsbyplayerid?: Maybe<StatsByPlayerId>;
 };
@@ -106,11 +105,6 @@ export type GetPlayerNameQueryVariables = Exact<{
 
 export type GetPlayerNameQuery = { __typename?: 'Query', getplayerbyname?: { __typename?: 'Player', id: number, first_name: string, height_feet?: number | null, height_inches?: number | null, last_name: string, position: string, weight_pounds?: number | null, team?: { __typename?: 'Team', id: number, abbreviation: string, city: string, conference: string, division: string, full_name: string, name: string } | null } | null };
 
-export type GetAllPlayersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetAllPlayersQuery = { __typename?: 'Query', getplayer?: { __typename?: 'Player', id: number, first_name: string, height_feet?: number | null, height_inches?: number | null, last_name: string, position: string, weight_pounds?: number | null, team?: { __typename?: 'Team', id: number, abbreviation: string, city: string, conference: string, division: string, full_name: string, name: string } | null } | null };
-
 export const PlayerFragmentFragmentDoc = gql`
     fragment playerFragment on Player {
   id
@@ -166,37 +160,3 @@ export function useGetPlayerNameLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type GetPlayerNameQueryHookResult = ReturnType<typeof useGetPlayerNameQuery>;
 export type GetPlayerNameLazyQueryHookResult = ReturnType<typeof useGetPlayerNameLazyQuery>;
 export type GetPlayerNameQueryResult = Apollo.QueryResult<GetPlayerNameQuery, GetPlayerNameQueryVariables>;
-export const GetAllPlayersDocument = gql`
-    query GetAllPlayers {
-  getplayer {
-    ...playerFragment
-  }
-}
-    ${PlayerFragmentFragmentDoc}`;
-
-/**
- * __useGetAllPlayersQuery__
- *
- * To run a query within a React component, call `useGetAllPlayersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetAllPlayersQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetAllPlayersQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetAllPlayersQuery(baseOptions?: Apollo.QueryHookOptions<GetAllPlayersQuery, GetAllPlayersQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetAllPlayersQuery, GetAllPlayersQueryVariables>(GetAllPlayersDocument, options);
-      }
-export function useGetAllPlayersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllPlayersQuery, GetAllPlayersQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetAllPlayersQuery, GetAllPlayersQueryVariables>(GetAllPlayersDocument, options);
-        }
-export type GetAllPlayersQueryHookResult = ReturnType<typeof useGetAllPlayersQuery>;
-export type GetAllPlayersLazyQueryHookResult = ReturnType<typeof useGetAllPlayersLazyQuery>;
-export type GetAllPlayersQueryResult = Apollo.QueryResult<GetAllPlayersQuery, GetAllPlayersQueryVariables>;

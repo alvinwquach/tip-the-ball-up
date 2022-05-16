@@ -29,12 +29,3 @@ const namequery = gql`
     }
   }
 `
-
-const allquery = gql`
-  ${playerFragment}
-  query GetAllPlayers {
-    getplayer {
-      ...playerFragment
-    }
-  }
-`

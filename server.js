@@ -21,7 +21,7 @@ type Game {
   visitor_team_score: Int!
 }
 
-type StatsByPlayer {
+type StatsByPlayerId {
   id: Int!
   ast: Int!
   blk: Int!
@@ -75,14 +75,6 @@ type Query {
 }
 `
 
-// creating api call
-const getPlayerFromApi = async () => {
-  const response = await fetch(
-    'https://www.balldontlie.io/api/v1/players?search'
-  )
-  return response.json()
-}
-
 //creating api call to grab beer by name
 const getPlayerFromApiByName = async (beerName) => {
   const response = await fetch(
@@ -93,10 +85,6 @@ const getPlayerFromApiByName = async (beerName) => {
 
 const resolvers = {
   Query: {
-    getplayer: async () => {
-      const players = await getPlayerFromApi()
-      return players[0]
-    },
     getplayerbyname: async (root, args) => {
       const players = await getPlayerFromApiByName(args.name)
       return players[0]
