@@ -1,14 +1,7 @@
-// creating API call
-export const getPlayerFromApi = async (): Promise<PlayerApi[]> => {
-  const response = await fetch(
-    'https://www.balldontlie.io/api/v1/players?search'
-  )
-  return response.json()
-}
-
-export const getStatsByPlayer = async (
+// creating API call to grab current season stats by player id
+export const getStatsByPlayerId = async (
   playerId: number
-): Promise<StatsByPlayerApi> => {
+): Promise<StatsByPlayerIdApi> => {
   const response = await fetch(
     `https://www.balldontlie.io/api/v1/stats?seasons[]=2021&start_date=2021-10-18&player_ids[]=${playerId}&per_page=100`
   )
@@ -26,7 +19,7 @@ export const getPlayerFromApiByName = async (
 }
 
 // creating nested types for typescript
-export type StatsByPlayerApi = {
+export type StatsByPlayerIdApi = {
   data: {
     id: number
     ast: number
@@ -148,7 +141,7 @@ export const getPlayer = async (): Promise<PlayerApi> => {
   }
 }
 
-export const getPlayerStats = async (): Promise<StatsByPlayerApi> => {
+export const getPlayerStats = async (): Promise<StatsByPlayerIdApi> => {
   return {
     data: [
       {

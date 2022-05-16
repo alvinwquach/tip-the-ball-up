@@ -15,6 +15,21 @@ export type Scalars = {
   Float: number;
 };
 
+export type Game = {
+  __typename?: 'Game';
+  date: Scalars['String'];
+  home_team_id: Scalars['Int'];
+  home_team_score: Scalars['Int'];
+  id: Scalars['Int'];
+  period: Scalars['Int'];
+  postseason: Scalars['Boolean'];
+  season: Scalars['Int'];
+  status: Scalars['String'];
+  time: Scalars['String'];
+  visitor_team_id: Scalars['Int'];
+  visitor_team_score: Scalars['Int'];
+};
+
 export type Player = {
   __typename?: 'Player';
   first_name: Scalars['String'];
@@ -22,6 +37,7 @@ export type Player = {
   height_inches?: Maybe<Scalars['Int']>;
   id: Scalars['Int'];
   last_name: Scalars['String'];
+  name: Scalars['String'];
   position: Scalars['String'];
   team?: Maybe<Team>;
   weight_pounds?: Maybe<Scalars['Int']>;
@@ -31,11 +47,43 @@ export type Query = {
   __typename?: 'Query';
   getplayer?: Maybe<Player>;
   getplayerbyname?: Maybe<Player>;
+  getstatsbyplayerid?: Maybe<StatsByPlayerId>;
 };
 
 
 export type QueryGetplayerbynameArgs = {
   name: Scalars['String'];
+};
+
+
+export type QueryGetstatsbyplayeridArgs = {
+  playerid: Scalars['Int'];
+};
+
+export type StatsByPlayerId = {
+  __typename?: 'StatsByPlayerId';
+  ast: Scalars['Int'];
+  blk: Scalars['Int'];
+  dreb: Scalars['Int'];
+  fg3_pct: Scalars['Float'];
+  fg3m: Scalars['Int'];
+  fg_pct: Scalars['Float'];
+  fga: Scalars['Int'];
+  fgm: Scalars['Int'];
+  ft_pct: Scalars['Float'];
+  fta: Scalars['Int'];
+  ftm: Scalars['Int'];
+  game?: Maybe<Game>;
+  id: Scalars['Int'];
+  min: Scalars['String'];
+  oreb: Scalars['Int'];
+  pf: Scalars['Int'];
+  player?: Maybe<Player>;
+  pts: Scalars['Int'];
+  reb: Scalars['Int'];
+  stl: Scalars['Int'];
+  team?: Maybe<Team>;
+  turnover: Scalars['Int'];
 };
 
 export type Team = {

@@ -25,6 +25,9 @@ const client = new ApolloClient({
 
 const Home: NextPage = () => {
   const [playerName, setPlayerName] = useState('')
+  const [playerStats, setPlayerStats] = useState<
+    { id: number; name: string }[]
+  >([])
   const [searched, setSearched] = useState(false)
 
   const { register, resetField, handleSubmit } = useForm({
