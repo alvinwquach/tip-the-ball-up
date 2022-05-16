@@ -8,7 +8,7 @@ export const getPlayerFromApi = async (): Promise<PlayerApi[]> => {
 
 export const getStatsByPlayer = async (
   playerId: number
-): Promise<StatsByPlayerApi[]> => {
+): Promise<StatsByPlayerApi> => {
   const response = await fetch(
     `https://www.balldontlie.io/api/v1/stats?seasons[]=2021&start_date=2021-10-18&player_ids[]=${playerId}&per_page=100`
   )
@@ -28,18 +28,37 @@ export const getPlayerFromApiByName = async (
 // creating nested types for typescript
 export type StatsByPlayerApi = {
   data: {
-    id: number,
-    ast: number,
-    blk: number,
-    dreb: number,
-    fg3_pct: number,
-    fg3a: number,
-    fg3m: number,
-    fg_pct: number,
-    fga: number,
-    fgm: number,
-    
+    id: number
+    ast: number
+    blk: number
+    dreb: number
+    fg3_pct: number
+    fg3a: number
+    fg3m: number
+    fg_pct: number
+    fga: number
+    fgm: number
+    ft_pct: number
+    fta: number
+    ftm: number
+    game: Game
+    min: string
+    oreb: number
+    pf: number
+    player: Player
+    pts: number
+    reb: number
+    stl: number
+    team: Team
+    turnover: number
   }[]
+  meta: {
+    total_pages: number
+    current_page: number
+    next_page: number
+    per_page: number
+    total_count: number
+  }
 }
 
 type Team = {
@@ -97,7 +116,6 @@ type Player = {
   weight_pounds: number
 }
 
-
 export const getPlayer = async (): Promise<PlayerApi> => {
   return {
     data: [
@@ -131,68 +149,69 @@ export const getPlayer = async (): Promise<PlayerApi> => {
 }
 
 export const getPlayerStats = async (): Promise<StatsByPlayerApi> => {
-return {
-  data: [
+  return {
+    data: [
       {
-          "id": 8182497,
-          "ast": 2,
-          "blk": 0,
-          "dreb": 5,
-          "fg3_pct": 42.9,
-          "fg3a": 7,
-          "fg3m": 3,
-          "fg_pct": 62.5,
-          "fga": 16,
-          "fgm": 10,
-          "ft_pct": 0.0,
-          "fta": 1,
-          "ftm": 0,
-          "game": {
-              "id": 473644,
-              "date": "2021-11-19T00:00:00.000Z",
-              "home_team_id": 2,
-              "home_team_score": 130,
-              "period": 4,
-              "postseason": false,
-              "season": 2021,
-              "status": "Final",
-              "time": "",
-              "visitor_team_id": 14,
-              "visitor_team_score": 108
-          },
-          "min": "32:04",
-          "oreb": 1,
-          "pf": 3,
-          "player": {
-              "id": 237,
-              "first_name": "LeBron",
-              "height_feet": 6,
-              "height_inches": 8,
-              "last_name": "James",
-              "position": "F",
-              "team_id": 14,
-              "weight_pounds": 250
-          },
-          "pts": 23,
-          "reb": 6,
-          "stl": 2,
-          "team": {
-              "id": 14,
-              "abbreviation": "LAL",
-              "city": "Los Angeles",
-              "conference": "West",
-              "division": "Pacific",
-              "full_name": "Los Angeles Lakers",
-              "name": "Lakers"
-          },
-          "turnover": 3
-      }
-  ],
-  "meta": {
-      "total_pages": 59,
-      "current_page": 1,
-      "next_page": 2,
-      "per_page": 1,
-      "total_count": 59
+        id: 7367678,
+        ast: 1,
+        blk: 1,
+        dreb: 10,
+        fg3_pct: 61.5,
+        fg3a: 13,
+        fg3m: 8,
+        fg_pct: 64.0,
+        fga: 25,
+        fgm: 16,
+        ft_pct: 100.0,
+        fta: 5,
+        ftm: 5,
+        game: {
+          id: 473422,
+          date: '2021-10-21T00:00:00.000Z',
+          home_team_id: 10,
+          home_team_score: 115,
+          period: 4,
+          postseason: false,
+          season: 2021,
+          status: 'Final',
+          time: '',
+          visitor_team_id: 13,
+          visitor_team_score: 113,
+        },
+        min: '37:32',
+        oreb: 0,
+        pf: 2,
+        player: {
+          id: 115,
+          first_name: 'Stephen',
+          height_feet: 6,
+          height_inches: 3,
+          last_name: 'Curry',
+          position: 'G',
+          team_id: 10,
+          weight_pounds: 190,
+        },
+        pts: 45,
+        reb: 10,
+        stl: 1,
+        team: {
+          id: 10,
+          abbreviation: 'GSW',
+          city: 'Golden State',
+          conference: 'West',
+          division: 'Pacific',
+          full_name: 'Golden State Warriors',
+          name: 'Warriors',
+        },
+        turnover: 6,
+      },
+    ],
+    meta: {
+      total_pages: 74,
+      current_page: 1,
+      next_page: 2,
+      per_page: 1,
+      total_count: 74,
+    },
   }
 }

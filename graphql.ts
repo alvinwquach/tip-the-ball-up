@@ -52,6 +52,7 @@ const resolvers: Resolvers = {
     },
     getstatsbyplayerid: async (root, args) => {
       const stats = await getStatsByPlayer(args.name)
+      return stats.data[0]
     },
   },
 }
