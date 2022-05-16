@@ -26,6 +26,22 @@ export const getPlayerFromApiByName = async (
 }
 
 // creating nested types for typescript
+export type StatsByPlayerApi = {
+  data: {
+    id: number,
+    ast: number,
+    blk: number,
+    dreb: number,
+    fg3_pct: number,
+    fg3a: number,
+    fg3m: number,
+    fg_pct: number,
+    fga: number,
+    fgm: number,
+    
+  }[]
+}
+
 type Team = {
   id: number
   abbreviation: string
@@ -81,31 +97,6 @@ type Player = {
   weight_pounds: number
 }
 
-export type StatsByPlayerApi = {
-  id: number
-  ast: number
-  blk: number
-  dreb: number
-  fg3_pct: number
-  fg3a: number
-  fg3m: number
-  fg_pct: number
-  fga: number
-  fgm: number
-  ft_pct: number
-  fta: number
-  ftm: number
-  game: Game
-  min: string
-  oreb: number
-  pf: number
-  player: Player
-  pts: number
-  reb: number
-  stl: number
-  team: Team
-  turnover: number
-}
 
 export const getPlayer = async (): Promise<PlayerApi> => {
   return {
@@ -139,61 +130,69 @@ export const getPlayer = async (): Promise<PlayerApi> => {
   }
 }
 
-export const getPlayerStats = async (): Promise<StatsByPlayerApi[]> => {
-  return [
-    {
-      id: 7568694,
-      ast: 3,
-      blk: 0,
-      dreb: 13,
-      fg3_pct: 25.0,
-      fg3a: 4,
-      fg3m: 1,
-      fg_pct: 42.1,
-      fga: 19,
-      fgm: 8,
-      ft_pct: 86.7,
-      fta: 15,
-      ftm: 13,
-      game: {
-        id: 473475,
-        date: '2021-10-28T00:00:00.000Z',
-        home_team_id: 23,
-        home_team_score: 110,
-        period: 4,
-        postseason: false,
-        season: 2021,
-        status: 'Final',
-        time: '',
-        visitor_team_id: 9,
-        visitor_team_score: 102,
-      },
-      min: '30:58',
-      oreb: 5,
-      pf: 2,
-      player: {
-        id: 145,
-        first_name: 'Joel',
-        height_feet: 7,
-        height_inches: 0,
-        last_name: 'Embiid',
-        position: 'F-C',
-        team_id: 23,
-        weight_pounds: 250,
-      },
-      pts: 30,
-      reb: 18,
-      stl: 1,
-      team: {
-        id: 23,
-        abbreviation: 'PHI',
-        city: 'Philadelphia',
-        conference: 'East',
-        division: 'Atlantic',
-        full_name: 'Philadelphia 76ers',
-        name: '76ers',
-      },
-      turnover: 4,
-    },
-  ]
+export const getPlayerStats = async (): Promise<StatsByPlayerApi> => {
+return {
+  data: [
+      {
+          "id": 8182497,
+          "ast": 2,
+          "blk": 0,
+          "dreb": 5,
+          "fg3_pct": 42.9,
+          "fg3a": 7,
+          "fg3m": 3,
+          "fg_pct": 62.5,
+          "fga": 16,
+          "fgm": 10,
+          "ft_pct": 0.0,
+          "fta": 1,
+          "ftm": 0,
+          "game": {
+              "id": 473644,
+              "date": "2021-11-19T00:00:00.000Z",
+              "home_team_id": 2,
+              "home_team_score": 130,
+              "period": 4,
+              "postseason": false,
+              "season": 2021,
+              "status": "Final",
+              "time": "",
+              "visitor_team_id": 14,
+              "visitor_team_score": 108
+          },
+          "min": "32:04",
+          "oreb": 1,
+          "pf": 3,
+          "player": {
+              "id": 237,
+              "first_name": "LeBron",
+              "height_feet": 6,
+              "height_inches": 8,
+              "last_name": "James",
+              "position": "F",
+              "team_id": 14,
+              "weight_pounds": 250
+          },
+          "pts": 23,
+          "reb": 6,
+          "stl": 2,
+          "team": {
+              "id": 14,
+              "abbreviation": "LAL",
+              "city": "Los Angeles",
+              "conference": "West",
+              "division": "Pacific",
+              "full_name": "Los Angeles Lakers",
+              "name": "Lakers"
+          },
+          "turnover": 3
+      }
+  ],
+  "meta": {
+      "total_pages": 59,
+      "current_page": 1,
+      "next_page": 2,
+      "per_page": 1,
+      "total_count": 59
+  }
 }

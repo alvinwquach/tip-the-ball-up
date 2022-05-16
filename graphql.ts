@@ -1,6 +1,10 @@
 import { Resolvers } from '@apollo/client'
 import { makeExecutableSchema } from '@graphql-tools/schema'
-import { getPlayerFromApiByName, getPlayerFromApi } from './basketballapi'
+import {
+  getPlayerFromApiByName,
+  getPlayerFromApi,
+  getStatsByPlayer,
+} from './basketballapi'
 
 //schema
 const typeDefs = `
@@ -29,6 +33,7 @@ type Team {
 type Query {
   getplayer: Player
   getplayerbyname(name: String!): Player
+  getstatsbyplayerid(playerid: Int!): PlayerStats
 }
 `
 
@@ -44,6 +49,9 @@ const resolvers: Resolvers = {
     getplayerbyname: async (root, args) => {
       const players = await getPlayerFromApiByName(args.name)
       return players.data[0]
+    },
+    getstatsbyplayerid: async (root, args) => {
+      const stats = await getStatsByPlayer(args.name)
     },
   },
 }

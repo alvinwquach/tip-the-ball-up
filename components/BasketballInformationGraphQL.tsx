@@ -20,6 +20,8 @@ function BasketballInformationGraphQL({
       <p>{player.weight_pounds}</p>
       <p>{player.position}</p>
       <p>{player.team?.full_name}</p>
+      <p>{player.team?.conference}</p>
+      <p>{player.team?.division}</p>
     </>
   ) : null
 }
