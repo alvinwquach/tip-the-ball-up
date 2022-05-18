@@ -47,7 +47,6 @@ type StatsByPlayerId {
 type Player {
     id: Int!
     first_name: String!
-    name: String!
     height_feet: Int
     height_inches: Int
     last_name: String!

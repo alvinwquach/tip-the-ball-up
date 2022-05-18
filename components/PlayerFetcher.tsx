@@ -1,5 +1,8 @@
 import React from 'react'
-import { useGetPlayerNameQuery } from '../src/generated/graphql'
+import {
+  useGetPlayerNameQuery,
+  useGetPlayerStatsQuery,
+} from '../src/generated/graphql'
 import BasketballInformationGraphQL from './BasketballInformationGraphQL'
 
 type PlayerFetcherProps = {
@@ -11,6 +14,7 @@ function PlayerFetcher({ playername, searched }: PlayerFetcherProps) {
   const { data, loading, error } = useGetPlayerNameQuery({
     variables: { playername },
   })
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
 

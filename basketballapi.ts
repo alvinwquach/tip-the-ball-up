@@ -1,3 +1,23 @@
+// https://www.balldontlie.io/api/v1/players?page=1&per_page=100
+// https://www.balldontlie.io/api/v1/players?page=2&per_page=100
+
+// export const getFirst200Players = async (): Promise<First200PlayersApi> => {
+//   const pageOneResponse = await fetch(
+//     `https://www.balldontlie.io/api/v1/players?page=1&per_page=100`
+//   )
+//   const pageTwoResponse = await fetch(
+//     `https://www.balldontlie.io/api/v1/players?page=2&per_page=100`
+//   )
+//   console.log(pageOneResponse.json())
+// }
+
+export const getFirst100Players = async () => {
+  const response = await fetch(
+    `https://www.balldontlie.io/api/v1/players?page=1&per_page=100`
+  )
+  return response.json()
+}
+
 // creating API call to grab current season stats by player id
 export const getStatsByPlayerId = async (
   playerId: number

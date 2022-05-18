@@ -49,7 +49,6 @@ type StatsByPlayerId {
 type Player {
     id: Int!
     first_name: String!
-    name: String!
     height_feet: Int
     height_inches: Int
     last_name: String!
@@ -69,14 +68,13 @@ type Team {
 }
 
 type Query {
-  getplayer: Player
   getplayerbyname(name: String!): Player
   getstatsbyplayerid(playerid: Int!): StatsByPlayerId
 }
 `
 
-//creating api call to grab beer by name
-const getPlayerFromApiByName = async (beerName) => {
+//creating api call to grab player by name
+const getPlayerFromApiByName = async (playerName) => {
   const response = await fetch(
     'https://www.balldontlie.io/api/v1/players?search${playerName}'
   )

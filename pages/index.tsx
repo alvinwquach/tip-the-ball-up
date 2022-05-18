@@ -9,9 +9,11 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 
+
 import { SchemaLink } from '@apollo/client/link/schema'
 import { schema } from '../graphql'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import TestComponent from '../components/TestComponent'
 
 type FormValues = {
   userInput: string
@@ -54,6 +56,7 @@ const Home: NextPage = () => {
         <main className="flex w-full flex-1 flex-col">
           <Navbar />
           <Header />
+          <TestComponent />
           <form
             className="flex justify-center"
             onSubmit={handleSubmit(onSubmit)}

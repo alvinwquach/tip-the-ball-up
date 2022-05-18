@@ -13,15 +13,19 @@ function BasketballInformationGraphQL({
 
   return player ? (
     <>
-      <p>{player.first_name}</p>
-      <p>{player.last_name}</p>
-      <p>{player.height_feet}</p>
-      <p>{player.height_inches}</p>
-      <p>{player.weight_pounds}</p>
-      <p>{player.position}</p>
-      <p>{player.team?.full_name}</p>
-      <p>{player.team?.conference}</p>
-      <p>{player.team?.division}</p>
+      <dl>
+        <dd>
+          {player.first_name} {player.last_name}
+        </dd>
+        <dd>
+          {player.height_feet}' {player.height_inches}"
+        </dd>
+        <dd>{player.weight_pounds}</dd>
+        <dd>{player.position}</dd>
+        <dd>{player.team?.full_name}</dd>
+        <dd>{player.team?.conference}</dd>
+        <dd>{player.team?.division}</dd>
+      </dl>
     </>
   ) : null
 }
