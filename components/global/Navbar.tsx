@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 function Navbar() {
   return (
     <div className="navbar fixed top-0 bg-neutral text-neutral-content">
@@ -29,9 +31,19 @@ function Navbar() {
               </a>
             </li>
             <li>
-              <a data-scroll="player" href="#player">
-                Player
-              </a>
+              <Link href="/players">
+                <a>Players</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/teams">
+                <a>Teams</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/games">
+                <a>Games</a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -42,20 +54,23 @@ function Navbar() {
             <a href="#home">Home</a>
           </li>
           <li>
-            <a href="#player">Player</a>
+            <Link href="/players">
+              <a>Players</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/teams">
+              <a>Teams</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/games">
+              <a>Games</a>
+            </Link>
           </li>
         </ul>
       </div>
-      <div className="navbar-end bg-neutral">
-        <a
-          className="btn btn-ghost bg-neutral text-xl uppercase"
-          href="https://alvinsblog.netlify.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Player
-        </a>
-      </div>
+      <div className="navbar-end bg-neutral"></div>
     </div>
   )
 }

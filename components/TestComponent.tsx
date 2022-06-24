@@ -1,27 +1,52 @@
 import React, { useState, useEffect } from 'react'
-import { getFirst100Players } from '../basketballapi'
+import { getAllPlayers } from '../basketballapi'
 
 function TestComponent() {
-  const [playerPage, setPlayerPage] = useState([])
+  const [playerPage, setPlayerPage] = useState<any[]>([])
 
   useEffect(() => {
     const getFirstPage = async () => {
-      const first100Players = await getFirst100Players()
-      setPlayerPage(first100Players.data)
+      const allPlayers = await getAllPlayers()
+      const paths = allPlayers
+      setPlayerPage(paths)
     }
     getFirstPage()
   }, [])
 
-  //   const getFirst100Players = async () => {
-  //     const response = await fetch(
-  //       `https://www.balldontlie.io/api/v1/players?page=1&per_page=100`
-  //     )
-  //     const data = await response.json()
-  //     setPlayerPage(data.data)
-  //     console.log(data.data)
-  //   }
-
   return <pre>{JSON.stringify(playerPage)}</pre>
 }
 
+// export async function getStaticPaths() {
+//   const players = players.map((player) => {
+//     params: {
+//     }
+//   })
+
+//   return {
+//     path: [{ params: {} }],
+//     fallback: true,
+//   }
+// }
+
+// export async function getStaticProps({ params }) {
+//   return { props: {} }
+// }
+
 export default TestComponent
+
+// import { getAllPlayers } from '../../basketballapi'
+
+// function Player() {
+//   return <div>Player</div>
+// }
+
+// export default Player
+
+// export async function getStaticPaths() {
+//   const players = await getAllPlayers()
+// }
+
+// const paths = players.map((player) => {
+
+// })
+

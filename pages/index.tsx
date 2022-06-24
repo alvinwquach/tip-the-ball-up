@@ -6,9 +6,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import PlayerFetcher from '../components/PlayerFetcher'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
-
+import Footer from '../components/global/Footer'
+import Navbar from '../components/global/Navbar'
 
 import { SchemaLink } from '@apollo/client/link/schema'
 import { schema } from '../graphql'
@@ -54,7 +53,6 @@ const Home: NextPage = () => {
         </Head>
 
         <main className="flex w-full flex-1 flex-col">
-          <Navbar />
           <Header />
           <TestComponent />
           <form
@@ -75,7 +73,6 @@ const Home: NextPage = () => {
             ) : null}
           </form>
         </main>
-        <Footer />
       </div>
     </ApolloProvider>
   )

@@ -1,21 +1,56 @@
-// https://www.balldontlie.io/api/v1/players?page=1&per_page=100
-// https://www.balldontlie.io/api/v1/players?page=2&per_page=100
-
-// export const getFirst200Players = async (): Promise<First200PlayersApi> => {
-//   const pageOneResponse = await fetch(
-//     `https://www.balldontlie.io/api/v1/players?page=1&per_page=100`
-//   )
-//   const pageTwoResponse = await fetch(
-//     `https://www.balldontlie.io/api/v1/players?page=2&per_page=100`
-//   )
-//   console.log(pageOneResponse.json())
-// }
-
-export const getFirst100Players = async () => {
+// creating API call to grab all players
+export const getAllPlayers = async () => {
+  const allPlayers = []
   const response = await fetch(
     `https://www.balldontlie.io/api/v1/players?page=1&per_page=100`
   )
-  return response.json()
+  const json = await response.json()
+
+  allPlayers.push(...json.data)
+
+  const responsetwo = await fetch(
+    `https://www.balldontlie.io/api/v1/players?page=2&per_page=100`
+  )
+
+  const json2 = await responsetwo.json()
+  allPlayers.push(...json2.data)
+
+  const responsethree = await fetch(
+    `https://www.balldontlie.io/api/v1/players?page=3&per_page=100`
+  )
+
+  const json3 = await responsethree.json()
+  allPlayers.push(...json3.data)
+
+  const responsefour = await fetch(
+    `https://www.balldontlie.io/api/v1/players?page=4&per_page=100`
+  )
+
+  const json4 = await responsefour.json()
+  allPlayers.push(...json4.data)
+
+  const responsefive = await fetch(
+    `https://www.balldontlie.io/api/v1/players?page=4&per_page=100`
+  )
+
+  const json5 = await responsefive.json()
+  allPlayers.push(...json5.data)
+
+  const responsesix = await fetch(
+    `https://www.balldontlie.io/api/v1/players?page=4&per_page=100`
+  )
+
+  const json6 = await responsesix.json()
+  allPlayers.push(...json6.data)
+
+  const responseseven = await fetch(
+    `https://www.balldontlie.io/api/v1/players?page=4&per_page=100`
+  )
+
+  const json7 = await responseseven.json()
+  allPlayers.push(...json7.data)
+
+  return allPlayers
 }
 
 // creating API call to grab current season stats by player id
