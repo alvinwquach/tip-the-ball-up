@@ -12,7 +12,7 @@ export default function Player({ player }: PlayerProps) {
       <Head>
         <title> Tip The Ball Up</title>
       </Head>
-      <pre>{JSON.stringify(player)}</pre>
+      <pre>{JSON.stringify(player, null, 4)}</pre>
     </>
   )
 }
@@ -42,10 +42,11 @@ export async function getStaticProps(context: any) {
   // takes the params object, returns an object with props
   // .find returns a boolean (returns first element of the array that returns true)
   const cache = await playerCache.cache.get()
-  const player = cache.find((cachedPlayer) => {
-    const fullName = cachedPlayer.first_name + `-` + cachedPlayer.last_name
-    return context.params.playername === fullName.toLowerCase()
-  })
+  const player =
+    cache.find((cachedPlayer) => {
+      const fullName = cachedPlayer.first_name + `-` + cachedPlayer.last_name
+      return context.params.playername === fullName.toLowerCase()
+    }) ?? null
   return {
     props: {
       player,
