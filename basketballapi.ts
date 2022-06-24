@@ -10,14 +10,24 @@ export const getPageOfPlayers = async (
 }
 
 // creating API call to grab all players
+// creating API call to grab all players
 export const getAllPlayers = async (): Promise<PagePlayer[]> => {
   const allPlayers = []
   // await to get rid of the promise
   const page1 = await getPageOfPlayers(1)
   allPlayers.push(...page1.data)
 
-  const page2 = await getPageOfPlayers(2)
-  allPlayers.push(...page2.data)
+  let currentPage
+  let next_page = 1
+  let total_pages = 42 // some random number, as long as it is bigger than 1, so we get the first page. then we will update this variable to the true total number of pages in line 27
+  const MAX_PAGES_TO_FETCH = 3
+  while (next_page <= total_pages || next_page <= MAX_PAGES_TO_FETCH) {
+    currentPage = await getPageOfPlayers(next_page)
+    allPlayers.push(...currentPage.data)
+    // Update so this variable so the next time line 24 runs it gets the next page
+    next_page = currentPage.meta.next_page
+    total_pages = currentPage.meta.total_pages
+  }
 
   return allPlayers
 }
