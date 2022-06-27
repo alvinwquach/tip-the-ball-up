@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { getAllPlayers, PagePlayer } from '../../basketballapi'
-import PlayerFetcher from '../../components/ProfileFetcher'
+import ProfileFetcher from '../../components/ProfileFetcher'
 import playerCache from '../../playercache'
 
 import { SchemaLink } from '@apollo/client/link/schema'
@@ -25,10 +25,10 @@ export default function Player({ player }: PlayerProps) {
   return (
     <>
       <Head>
-        <title>Tip The Ball Up</title>
+        <title>{fullName} | Tip The Ball Up</title>
       </Head>
       <ApolloProvider client={client}>
-        <PlayerFetcher playername={fullName} playerid={player.id} />
+        <ProfileFetcher playername={fullName} playerid={player.id} />
       </ApolloProvider>
       <pre className="min-h-full">{JSON.stringify(player, null, 4)}</pre>
     </>

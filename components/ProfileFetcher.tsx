@@ -11,7 +11,7 @@ type ProfileFetcherProps = {
   playerid: number
 }
 
-function PlayerFetcher({ playername, playerid }: ProfileFetcherProps) {
+function ProfileFetcher({ playername, playerid }: ProfileFetcherProps) {
   const { data, loading, error } = useGetPlayerNameQuery({
     variables: { playername },
   })
@@ -39,4 +39,4 @@ function PlayerFetcher({ playername, playerid }: ProfileFetcherProps) {
   )
 }
 
-export default PlayerFetcher
+export default ProfileFetcher
