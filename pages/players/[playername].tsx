@@ -8,6 +8,38 @@ import { schema } from '../../graphql'
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
+type PlayerHeightProps = {
+  feet?: number | null
+  inches?: number | null
+}
+
+function PlayerHeight({ feet, inches }: PlayerHeightProps) {
+  if (
+    feet === undefined ||
+    feet === null ||
+    inches === null ||
+    inches === null
+  ) {
+    return <dd>Unknown</dd>
+  }
+  return (
+    <dd>
+      {feet}' {inches}""
+    </dd>
+  )
+}
+
+type PlayerPositionProps = {
+  position?: string | null
+}
+
+function PlayerPosition({ position }: PlayerPositionProps) {
+  if (position === '') {
+    return <dd>Unknown</dd>
+  }
+  return <dd>{position}</dd>
+}
+
 type PlayerProps = {
   player: PagePlayer
 }
