@@ -1,18 +1,36 @@
 import Head from 'next/head'
 import { getAllPlayers, PagePlayer } from '../../basketballapi'
+import PlayerFetcher from '../../components/ProfileFetcher'
 import playerCache from '../../playercache'
+
+import { SchemaLink } from '@apollo/client/link/schema'
+import { schema } from '../../graphql'
+
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
 type PlayerProps = {
   player: PagePlayer
 }
 
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  // schema hooks up to local server
+  link: new SchemaLink({ schema }),
+})
+
 export default function Player({ player }: PlayerProps) {
+  // fullName doesn't exist on player object, fullName is 👇🏻
+  const fullName = `${player.first_name} ${player.last_name}`
+
   return (
     <>
       <Head>
-        <title> Tip The Ball Up</title>
+        <title>Tip The Ball Up</title>
       </Head>
-      <pre>{JSON.stringify(player, null, 4)}</pre>
+      <ApolloProvider client={client}>
+        <PlayerFetcher playername={fullName} playerid={player.id} />
+      </ApolloProvider>
+      <pre className="min-h-full">{JSON.stringify(player, null, 4)}</pre>
     </>
   )
 }
@@ -34,7 +52,7 @@ export async function getStaticPaths() {
 
   return {
     paths: paths,
-    fallback: true, // false or 'blocking'
+    fallback: false, // false or 'blocking'
   }
 }
 

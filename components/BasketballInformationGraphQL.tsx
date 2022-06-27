@@ -1,5 +1,8 @@
 import React from 'react'
-import { GetPlayerNameQuery } from '../src/generated/graphql'
+import {
+  GetPlayerNameQuery,
+  GetPlayerStatsQuery,
+} from '../src/generated/graphql'
 
 type PlayerHeightProps = {
   feet?: number | null
@@ -24,13 +27,15 @@ function PlayerHeight({ feet, inches }: PlayerHeightProps) {
 
 type BasketballInformationGraphQLProps = {
   playername: GetPlayerNameQuery
-  searched: boolean
+  playerid: GetPlayerStatsQuery
 }
+
 function BasketballInformationGraphQL({
   playername,
-  searched,
+  playerid,
 }: BasketballInformationGraphQLProps) {
   const player = playername.getplayerbyname
+  const stats = playerid.getstatsbyplayerid
 
   return player ? (
     <>
