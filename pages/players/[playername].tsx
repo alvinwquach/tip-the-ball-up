@@ -8,6 +8,17 @@ import { schema } from '../../graphql'
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
+var positionDescription = [
+  { PositionIndicator: 'F', Description: 'Forward' },
+  { PositionIndicator: 'G', Description: 'Guard' },
+  { PostionIndicator: 'C', Description: 'Center' },
+  { PostionIndicator: 'G-F', Description: 'Guard-Forward' },
+  { PositionIndicator: 'F-C', Description: 'Forawrd-Center' },
+  { PositionIndicator: 'F-G', Description: 'Forward-Guard' },
+  { PositionIndicator: 'G-F', Description: 'Guard-Forward' },
+  { PositionIndicator: 'C-F', Description: 'Center-Forward' },
+]
+
 type PlayerHeightProps = {
   feet?: number | null
   inches?: number | null
