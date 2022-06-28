@@ -35,16 +35,6 @@ function Navbar() {
                 <a>Players</a>
               </Link>
             </li>
-            <li>
-              <Link href="/teams">
-                <a>Teams</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/games">
-                <a>Games</a>
-              </Link>
-            </li>
           </ul>
         </div>
       </div>
@@ -56,16 +46,6 @@ function Navbar() {
           <li>
             <Link href="/players">
               <a>Players</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/teams">
-              <a>Teams</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/games">
-              <a>Games</a>
             </Link>
           </li>
         </ul>

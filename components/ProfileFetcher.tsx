@@ -3,16 +3,32 @@ import {
   useGetPlayerNameQuery,
   useGetPlayerStatsQuery,
 } from '../src/generated/graphql'
-import BasketballInformationGraphQL from './BasketballInformationGraphQL'
+import PlayerInfoGraphQL from './PlayerInfoGraphQL'
+import PlayerStatsGraphQL from './PlayerStatsGraphQL'
 
 type ProfileFetcherProps = {
-  /* Player's full name */
+  /**
+   * Player's full name
+   */
   playername: string
+  /**
+   * Player id
+   */
   playerid: number
 }
 
+/**
+ * given the player's name and id, queries for player by name
+ * and queries for player by id for stats
+ * @param param0
+ * @returns
+ */
 function ProfileFetcher({ playername, playerid }: ProfileFetcherProps) {
-  const { data, loading, error } = useGetPlayerNameQuery({
+  const {
+    data: playerData,
+    loading: playerLoading,
+    error: playerError,
+  } = useGetPlayerNameQuery({
     variables: { playername },
   })
 
@@ -24,16 +40,21 @@ function ProfileFetcher({ playername, playerid }: ProfileFetcherProps) {
     variables: { playerid },
   })
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error.message}</p>
+  if (playerLoading) return <p>Loading...</p>
+  if (playerError) return <p>Error: {playerError.message}</p>
 
   if (statsLoading) return <p>Loading...</p>
   if (statsError) return <p>Error: {statsError.message}</p>
 
   return (
     <div>
-      {data && statsData && (
-        <BasketballInformationGraphQL playerid={statsData} playername={data} />
+      {playerData && statsData && (
+        /*passes in the stats data and player data to 
+        basketball information graphql */
+        <>
+          <PlayerInfoGraphQL playername={playerData} />
+          <PlayerStatsGraphQL playerid={statsData} />
+        </>
       )}
     </div>
   )

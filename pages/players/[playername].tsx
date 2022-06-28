@@ -8,49 +8,6 @@ import { schema } from '../../graphql'
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
-var positionDescription = [
-  { PositionIndicator: 'F', Description: 'Forward' },
-  { PositionIndicator: 'G', Description: 'Guard' },
-  { PositionIndicator: 'C', Description: 'Center' },
-  { PositionIndicator: 'G-F', Description: 'Guard-Forward' },
-  { PositionIndicator: 'F-C', Description: 'Forawrd-Center' },
-  { PositionIndicator: 'F-G', Description: 'Forward-Guard' },
-  { PositionIndicator: 'G-F', Description: 'Guard-Forward' },
-  { PositionIndicator: 'C-F', Description: 'Center-Forward' },
-]
-
-type PlayerHeightProps = {
-  feet?: number | null
-  inches?: number | null
-}
-
-function PlayerHeight({ feet, inches }: PlayerHeightProps) {
-  if (
-    feet === undefined ||
-    feet === null ||
-    inches === null ||
-    inches === null
-  ) {
-    return <dd>Unknown</dd>
-  }
-  return (
-    <dd>
-      {feet}' {inches}""
-    </dd>
-  )
-}
-
-type PlayerPositionProps = {
-  position?: string | null
-}
-
-function PlayerPosition({ position }: PlayerPositionProps) {
-  if (position === '') {
-    return <dd>Unknown</dd>
-  }
-  return <dd>{position}</dd>
-}
-
 type PlayerProps = {
   player: PagePlayer
 }
@@ -70,10 +27,12 @@ export default function Player({ player }: PlayerProps) {
       <Head>
         <title>{fullName} | Tip The Ball Up</title>
       </Head>
-      <ApolloProvider client={client}>
-        <ProfileFetcher playername={fullName} playerid={player.id} />
-      </ApolloProvider>
-      <pre className="min-h-full">{JSON.stringify(player, null, 4)}</pre>
+      <section className="h-screen">
+        <ApolloProvider client={client}>
+          <ProfileFetcher playername={fullName} playerid={player.id} />
+        </ApolloProvider>
+      </section>
+      <pre className="">{JSON.stringify(player, null, 4)}</pre>
     </>
   )
 }

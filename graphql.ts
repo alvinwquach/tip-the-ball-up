@@ -73,7 +73,7 @@ type Query {
 
 // apis
 
-// interface from Apolo for resolvers
+// interface from Apollo for resolvers
 const resolvers: Resolvers = {
   Query: {
     getplayerbyname: async (root, args) => {
