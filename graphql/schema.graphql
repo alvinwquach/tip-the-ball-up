@@ -60,5 +60,5 @@ type Team {
 
 type Query {
   getplayerbyname(name: String!): Player
-  getstatsbyplayerid(playerid: Int!): StatsByPlayerId
+  getstatsbyplayerid(playerid: Int!): [StatsByPlayerId]
 }

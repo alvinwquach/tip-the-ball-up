@@ -4,7 +4,6 @@ import { getPlayerFromApiByName, getStatsByPlayerId } from './basketballapi'
 
 //schema
 const typeDefs = `
-
 type Game {
   id: Int!
   date: String!
@@ -67,7 +66,7 @@ type Team {
 
 type Query {
   getplayerbyname(name: String!): Player
-  getstatsbyplayerid(playerid: Int!): StatsByPlayerId
+  getstatsbyplayerid(playerid: Int!): [StatsByPlayerId]
 }
 `
 
@@ -82,7 +81,10 @@ const resolvers: Resolvers = {
     },
     getstatsbyplayerid: async (root, args) => {
       const stats = await getStatsByPlayerId(args.name)
-      return stats.data[0]
+      const sortGameStatsByDate = stats.data.sort((a, b) =>
+        a.game.date > b.game.date ? 1 : -1
+      )
+      return sortGameStatsByDate
     },
   },
 }

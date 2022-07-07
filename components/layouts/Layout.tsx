@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="bg-slate-50">
       <Head>
-        <title>Cool Gym Hwy 49</title>
+        <title>Tip The Ball Up</title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"

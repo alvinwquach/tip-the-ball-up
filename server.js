@@ -6,7 +6,6 @@ const fetch = require('node-fetch')
 const app = express()
 
 const typeDefs = `
-
 type Game {
   id: Int!
   date: String!
@@ -69,17 +68,9 @@ type Team {
 
 type Query {
   getplayerbyname(name: String!): Player
-  getstatsbyplayerid(playerid: Int!): StatsByPlayerId
+  getstatsbyplayerid(playerid: Int!): [StatsByPlayerId]
 }
 `
-
-//creating api call to grab player by name
-const getPlayerFromApiByName = async (playerName) => {
-  const response = await fetch(
-    'https://www.balldontlie.io/api/v1/players?search${playerName}'
-  )
-  return response.json()
-}
 
 const resolvers = {
   Query: {
@@ -89,7 +80,7 @@ const resolvers = {
     },
     getstatsbyplayerid: async (root, args) => {
       const stats = await getStatsByPlayerId(args.name)
-      return stats.data[0]
+      return stats.data
     },
   },
 }

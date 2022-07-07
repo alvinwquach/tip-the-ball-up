@@ -49,10 +49,10 @@ function ProfileFetcher({ playername, playerid }: ProfileFetcherProps) {
   return (
     <div>
       {playerData && statsData && (
-        /*passes in the stats data and player data to 
-        basketball information graphql */
         <>
+          {/* Passes in the player data to PlayerInfoGraphQL */}
           <PlayerInfoGraphQL playername={playerData} />
+          {/* Passes in the stats data to PlayerStatsGraphQL */}
           <PlayerStatsGraphQL playerid={statsData} />
         </>
       )}

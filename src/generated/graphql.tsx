@@ -31,21 +31,21 @@ export type Game = {
 };
 
 export type Player = {
-  __typename?: 'Player'
-  first_name: Scalars['String']
-  height_feet?: Maybe<Scalars['Int']>
-  height_inches?: Maybe<Scalars['Int']>
-  id: Scalars['Int']
-  last_name: Scalars['String']
-  position: Scalars['String']
-  team?: Maybe<Team>
-  weight_pounds?: Maybe<Scalars['Int']>
-}
+  __typename?: 'Player';
+  first_name: Scalars['String'];
+  height_feet?: Maybe<Scalars['Int']>;
+  height_inches?: Maybe<Scalars['Int']>;
+  id: Scalars['Int'];
+  last_name: Scalars['String'];
+  position: Scalars['String'];
+  team?: Maybe<Team>;
+  weight_pounds?: Maybe<Scalars['Int']>;
+};
 
 export type Query = {
   __typename?: 'Query';
   getplayerbyname?: Maybe<Player>;
-  getstatsbyplayerid?: Maybe<StatsByPlayerId>;
+  getstatsbyplayerid?: Maybe<Array<Maybe<StatsByPlayerId>>>;
 };
 
 
@@ -105,78 +105,11 @@ export type GetPlayerNameQueryVariables = Exact<{
 export type GetPlayerNameQuery = { __typename?: 'Query', getplayerbyname?: { __typename?: 'Player', id: number, first_name: string, height_feet?: number | null, height_inches?: number | null, last_name: string, position: string, weight_pounds?: number | null, team?: { __typename?: 'Team', id: number, abbreviation: string, city: string, conference: string, division: string, full_name: string, name: string } | null } | null };
 
 export type GetPlayerStatsQueryVariables = Exact<{
-  playerid: Scalars['Int']
-}>
+  playerid: Scalars['Int'];
+}>;
 
-export type GetPlayerStatsQuery = {
-  __typename?: 'Query'
-  getstatsbyplayerid?: {
-    __typename?: 'StatsByPlayerId'
-    id: number
-    ast: number
-    blk: number
-    dreb: number
-    fg3_pct: number
-    fg3m: number
-    fg_pct: number
-    fga: number
-    fgm: number
-    ft_pct: number
-    fta: number
-    ftm: number
-    min: string
-    oreb: number
-    pf: number
-    pts: number
-    reb: number
-    stl: number
-    turnover: number
-    game?: {
-      __typename?: 'Game'
-      id: number
-      date: string
-      home_team_id: number
-      home_team_score: number
-      period: number
-      postseason: boolean
-      season: number
-      status: string
-      time: string
-      visitor_team_id: number
-      visitor_team_score: number
-    } | null
-    player?: {
-      __typename?: 'Player'
-      id: number
-      first_name: string
-      height_feet?: number | null
-      height_inches?: number | null
-      last_name: string
-      position: string
-      weight_pounds?: number | null
-      team?: {
-        __typename?: 'Team'
-        id: number
-        abbreviation: string
-        city: string
-        conference: string
-        division: string
-        full_name: string
-        name: string
-      } | null
-    } | null
-    team?: {
-      __typename?: 'Team'
-      id: number
-      abbreviation: string
-      city: string
-      conference: string
-      division: string
-      full_name: string
-      name: string
-    } | null
-  } | null
-}
+
+export type GetPlayerStatsQuery = { __typename?: 'Query', getstatsbyplayerid?: Array<{ __typename?: 'StatsByPlayerId', id: number, ast: number, blk: number, dreb: number, fg3_pct: number, fg3m: number, fg_pct: number, fga: number, fgm: number, ft_pct: number, fta: number, ftm: number, min: string, oreb: number, pf: number, pts: number, reb: number, stl: number, turnover: number, game?: { __typename?: 'Game', id: number, date: string, home_team_id: number, home_team_score: number, period: number, postseason: boolean, season: number, status: string, time: string, visitor_team_id: number, visitor_team_score: number } | null, player?: { __typename?: 'Player', id: number, first_name: string, height_feet?: number | null, height_inches?: number | null, last_name: string, position: string, weight_pounds?: number | null, team?: { __typename?: 'Team', id: number, abbreviation: string, city: string, conference: string, division: string, full_name: string, name: string } | null } | null, team?: { __typename?: 'Team', id: number, abbreviation: string, city: string, conference: string, division: string, full_name: string, name: string } | null } | null> | null };
 
 export const PlayerFragmentFragmentDoc = gql`
     fragment playerFragment on Player {
@@ -234,57 +167,43 @@ export type GetPlayerNameQueryHookResult = ReturnType<typeof useGetPlayerNameQue
 export type GetPlayerNameLazyQueryHookResult = ReturnType<typeof useGetPlayerNameLazyQuery>;
 export type GetPlayerNameQueryResult = Apollo.QueryResult<GetPlayerNameQuery, GetPlayerNameQueryVariables>;
 export const GetPlayerStatsDocument = gql`
-  query GetPlayerStats($playerid: Int!) {
-    getstatsbyplayerid(playerid: $playerid) {
+    query GetPlayerStats($playerid: Int!) {
+  getstatsbyplayerid(playerid: $playerid) {
+    id
+    ast
+    blk
+    dreb
+    fg3_pct
+    fg3m
+    fg_pct
+    fga
+    fgm
+    ft_pct
+    fta
+    ftm
+    game {
       id
-      ast
-      blk
-      dreb
-      fg3_pct
-      fg3m
-      fg_pct
-      fga
-      fgm
-      ft_pct
-      fta
-      ftm
-      game {
-        id
-        date
-        home_team_id
-        home_team_score
-        period
-        postseason
-        season
-        status
-        time
-        visitor_team_id
-        visitor_team_score
-      }
-      min
-      oreb
-      pf
-      player {
-        id
-        first_name
-        height_feet
-        height_inches
-        last_name
-        position
-        team {
-          id
-          abbreviation
-          city
-          conference
-          division
-          full_name
-          name
-        }
-        weight_pounds
-      }
-      pts
-      reb
-      stl
+      date
+      home_team_id
+      home_team_score
+      period
+      postseason
+      season
+      status
+      time
+      visitor_team_id
+      visitor_team_score
+    }
+    min
+    oreb
+    pf
+    player {
+      id
+      first_name
+      height_feet
+      height_inches
+      last_name
+      position
       team {
         id
         abbreviation
@@ -294,10 +213,24 @@ export const GetPlayerStatsDocument = gql`
         full_name
         name
       }
-      turnover
+      weight_pounds
     }
+    pts
+    reb
+    stl
+    team {
+      id
+      abbreviation
+      city
+      conference
+      division
+      full_name
+      name
+    }
+    turnover
   }
-`
+}
+    `;
 
 /**
  * __useGetPlayerStatsQuery__
@@ -315,37 +248,14 @@ export const GetPlayerStatsDocument = gql`
  *   },
  * });
  */
-export function useGetPlayerStatsQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    GetPlayerStatsQuery,
-    GetPlayerStatsQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<GetPlayerStatsQuery, GetPlayerStatsQueryVariables>(
-    GetPlayerStatsDocument,
-    options
-  )
-}
-export function useGetPlayerStatsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetPlayerStatsQuery,
-    GetPlayerStatsQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<GetPlayerStatsQuery, GetPlayerStatsQueryVariables>(
-    GetPlayerStatsDocument,
-    options
-  )
-}
-export type GetPlayerStatsQueryHookResult = ReturnType<
-  typeof useGetPlayerStatsQuery
->
-export type GetPlayerStatsLazyQueryHookResult = ReturnType<
-  typeof useGetPlayerStatsLazyQuery
->
-export type GetPlayerStatsQueryResult = Apollo.QueryResult<
-  GetPlayerStatsQuery,
-  GetPlayerStatsQueryVariables
->
+export function useGetPlayerStatsQuery(baseOptions: Apollo.QueryHookOptions<GetPlayerStatsQuery, GetPlayerStatsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPlayerStatsQuery, GetPlayerStatsQueryVariables>(GetPlayerStatsDocument, options);
+      }
+export function useGetPlayerStatsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPlayerStatsQuery, GetPlayerStatsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPlayerStatsQuery, GetPlayerStatsQueryVariables>(GetPlayerStatsDocument, options);
+        }
+export type GetPlayerStatsQueryHookResult = ReturnType<typeof useGetPlayerStatsQuery>;
+export type GetPlayerStatsLazyQueryHookResult = ReturnType<typeof useGetPlayerStatsLazyQuery>;
+export type GetPlayerStatsQueryResult = Apollo.QueryResult<GetPlayerStatsQuery, GetPlayerStatsQueryVariables>;

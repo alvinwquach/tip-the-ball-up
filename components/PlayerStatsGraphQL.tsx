@@ -17,15 +17,15 @@ type PlayerStatsGraphQLProps = {
 function PlayerStatsGraphQL({ playerid }: PlayerStatsGraphQLProps) {
   const stats = playerid.getstatsbyplayerid
 
-  // Only render play stats if stats is not undefined
+  // Only render player stats if stats is not undefined
   return stats ? (
     <>
       <dl>
-        <dd>{stats.ast}</dd>
+        {/* <dd>{stats.ast}</dd>
         <dd>{stats.blk}</dd>
         <dd>{stats.pts}</dd>
         <dd>{stats.reb}</dd>
-        <dd>{stats.stl}</dd>
+        <dd>{stats.stl}</dd> */}
       </dl>
     </>
   ) : null
