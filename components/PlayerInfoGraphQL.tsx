@@ -87,19 +87,24 @@ function PlayerInfoGraphQL({ playername }: PlayerInfoGraphQLProps) {
   // Only render player if player is not undefined (return player ? (:) null
   return player ? (
     <>
-      <dl>
-        <dd>
-          {player.first_name} {player.last_name}
-        </dd>
-        {/* Player Height will return a human readable string aka 6'7", if undefined, will return Unknown*/}
-        <PlayerHeight feet={player.height_feet} inches={player.height_inches} />
-        <dd>{player.weight_pounds}</dd>
-        {/* Player Position will return the longhand position, C => Center, and if undefoned or null, will return unknown */}
-        <PlayerPosition position={player.position} />
-        <dd>{player.team?.full_name}</dd>
-        <dd>{player.team?.conference}</dd>
-        <dd>{player.team?.division}</dd>
-      </dl>
+      <section className="min-h-screen">
+        <dl>
+          <dd>
+            {player.first_name} {player.last_name}
+          </dd>
+          {/* Player Height will return a human readable string aka 6'7", if undefined, will return Unknown*/}
+          <PlayerHeight
+            feet={player.height_feet}
+            inches={player.height_inches}
+          />
+          <dd>{player.weight_pounds}</dd>
+          {/* Player Position will return the longhand position, C => Center, and if undefoned or null, will return unknown */}
+          <PlayerPosition position={player.position} />
+          <dd>{player.team?.full_name}</dd>
+          <dd>{player.team?.conference}</dd>
+          <dd>{player.team?.division}</dd>
+        </dl>
+      </section>
     </>
   ) : null
 }

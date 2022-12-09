@@ -17,15 +17,19 @@ export const getAllPlayers = async (): Promise<PagePlayer[]> => {
   allPlayers.push(...page1.data)
 
   let currentPage
-  let next_page = 1
-  let total_pages = 42 // some random number, as long as it is bigger than 1, so we get the first page. then we will update this variable to the true total number of pages in line 27
-  const MAX_PAGES_TO_FETCH = 3
-  while (next_page <= total_pages && next_page <= MAX_PAGES_TO_FETCH) {
-    currentPage = await getPageOfPlayers(next_page)
-    allPlayers.push(...currentPage.data)
-    // Update so this variable so the next time line 24 runs it gets the next page
-    next_page = currentPage.meta.next_page
-    total_pages = currentPage.meta.total_pages
+  let next_page = 2 // start from page 2 since we already got page 1
+  let total_pages = page1.meta.total_pages
+  const MAX_PAGES_TO_FETCH = 43
+  while (next_page < total_pages && next_page <= MAX_PAGES_TO_FETCH) {
+    try {
+      currentPage = await getPageOfPlayers(next_page)
+      allPlayers.push(...currentPage.data)
+      // Update so this variable so the next time line 24 runs it gets the next page
+      next_page = currentPage.meta.next_page
+    } catch (err) {
+      // Handle the error here, such as logging it or retrying the request
+      console.error(err)
+    }
   }
 
   return allPlayers
